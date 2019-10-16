@@ -17,8 +17,14 @@ class App extends Component {
         {name: newName, age: 28},
         {name: 'Manu', age: 30},
         {name: 'Steph', age: 20},
-      ]
+      ],
+      showPersons: false
     } )
+  }
+
+  togglePersonsHandler = () => {
+      const doesShow = this.state.showPersons;
+      this.setState({showPersons: !doesShow})
   }
 
   nameChangedHandler = (event) => {
@@ -46,18 +52,23 @@ const style = {
         <p>This is really working!</p>
         <button 
         style={style}
-        onClick={()=>this.switchNameHandler('maxUsingArrowFucntions')}>Switch Name</button>
-        <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age}/>
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'maxFromtheLabel')}
-          changed={this.nameChangedHandler} >My hobbies: Racing</Person>
-        <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age}/>
+        onClick={this.togglePersonsHandler}>Toogle persons</button>
+        { 
+          this.state.showPersons ? 
+              <div >
+                  <Person 
+                    name={this.state.persons[0].name} 
+                    age={this.state.persons[0].age}/>
+                  <Person 
+                    name={this.state.persons[1].name} 
+                    age={this.state.persons[1].age}
+                    click={this.switchNameHandler.bind(this, 'maxFromtheLabel')}
+                    changed={this.nameChangedHandler} >My hobbies: Racing</Person>
+                  <Person 
+                    name={this.state.persons[2].name} 
+                    age={this.state.persons[2].age}/>
+              </div> : null
+          }        
       </div>
     );
   }
