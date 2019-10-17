@@ -5,7 +5,7 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      {name: 'Max', age: 28},
+      {name: 'Max', age: 45},
       {name: 'Manu', age: 30},
       {name: 'Stephanie', age: 20},
     ]
@@ -30,7 +30,7 @@ class App extends Component {
   nameChangedHandler = (event) => {
     this.setState( {
       persons:[
-        {name: 'Max', age: 28},
+        {name: 'Max', age: 50},
         {name: event.target.value, age: 30},
         {name: 'Steph', age: 26},
       ]
@@ -46,29 +46,26 @@ const style = {
   curson: 'pointer'
 };
 
+    let persons = null;
+
+    if(this.state.showPersons){
+      persons = (
+                    <div >
+                      {this.state.persons.map(person => {
+                        return <Person name={person.name} age={person.age}/>  
+                      })}                    
+                </div> 
+                )
+    }
+
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p>This is really working!</p>
         <button 
         style={style}
-        onClick={this.togglePersonsHandler}>Toogle persons</button>
-        { 
-          this.state.showPersons ? 
-              <div >
-                  <Person 
-                    name={this.state.persons[0].name} 
-                    age={this.state.persons[0].age}/>
-                  <Person 
-                    name={this.state.persons[1].name} 
-                    age={this.state.persons[1].age}
-                    click={this.switchNameHandler.bind(this, 'maxFromtheLabel')}
-                    changed={this.nameChangedHandler} >My hobbies: Racing</Person>
-                  <Person 
-                    name={this.state.persons[2].name} 
-                    age={this.state.persons[2].age}/>
-              </div> : null
-          }        
+        onClick={this.togglePersonsHandler}>Toogle persons</button>      
+        {persons}
       </div>
     );
   }
