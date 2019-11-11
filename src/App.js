@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import Radium from 'radium';
+
 
 class App extends Component {
   state = {
@@ -103,5 +103,5 @@ const style = {
   }
 }
 
-export default Radium(App);
+export default App;
  
